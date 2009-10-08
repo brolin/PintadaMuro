@@ -1,0 +1,16 @@
+#!/usr/bin/ruby
+
+# Obtain the name of the file to process
+arg = ARGV[0]
+counter = 1
+
+File.open(arg, "r") do |toConv|
+  while (line = toConv.gets)
+    line.gsub!('Acc Report: x=',"<muestra seq=#{counter}>\n<x>")
+    line .gsub!(', y=',"</x>\n<y>")
+    line.gsub!(', z=',"</y>\n<z>")
+    line.gsub!(/(\d)(\n)/,'\1</z>\n</muestra>\n') # Como hacer valer los saltos de linea
+    counter = counter + 1
+    puts "#{line}"
+  end
+end
