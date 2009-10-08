@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
-
+# Script que me ayudo a conversitr los datos en xml
 # Obtain the name of the file to process
-arg = ARGV[0]
+arg = ARGV[0] 
 counter = 1
 
 File.open(arg, "r") do |toConv|

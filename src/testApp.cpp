@@ -2,11 +2,11 @@
 #include "stdio.h"
 
 /*
-<muestra seq=1>
-<x>137</x>
-<y>115</y>
-<z>15</z>
-</muestra>
+  <muestra seq=1>
+  <x>137</x>
+  <y>115</y>
+  <z>15</z>
+  </muestra>
 */
 
 //--------------------------------------------------------------
@@ -31,23 +31,23 @@ void testApp::setup(){
 
   cout<<numDragTags<<endl;
 
-  if(numDragTags > 0){
-
-    //we push into the last STROKE tag
-    //this temporarirly treats the tag as
-    //the document root.
-    //    XML.pushTag("muestra", numDragTags-1);
-  }
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
   /* Obtener valores del archivo xml */
-  int x = XML.getValue("muestra:x", 12, 145);
-  int y = XML.getValue("muestra:y", 12, 145);
-  int z = XML.getValue("muestra:z", 12, 145);
+  int x = XML.getValue("muestra:x", 0, seq);
+  int y = XML.getValue("muestra:y", 0, seq);
+  int z = XML.getValue("muestra:z", 0, seq);
   
-  cout<<"Valor x: "<<x<<" Valor y: "<<y<<" Valor z: "<<z<<endl;
+  cout<<"Valor x: "<<x<<" Valor y: "<<y<<" Valor z: "<<z<<" muestra: "<<seq++<<endl;
+
+  ofxOscMessage m;
+  m.setAddress( "/brocha/aceleracion" );
+  m.addIntArg( x );
+  m.addIntArg( y );
+  m.addIntArg( z );
+  sender.sendMessage( m );
 }
 
 
@@ -115,4 +115,3 @@ void testApp::mouseReleased(int x, int y, int button){
 void testApp::resized(int w, int h){
 
 }
-

@@ -32,7 +32,8 @@ class testApp : public ofBaseApp{
   
   string xmlStructure;
   string message;
-  
+  double seq; //Contador de la secuencia de muestras
+
  private:
   ofxOscSender sender;
 
